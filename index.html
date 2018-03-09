@@ -1,0 +1,39 @@
+<html>
+<head>
+<meta name="description" content="Putting into action some jQuery's animate() callbacks" />
+<link href="style.css" rel = "stylesheet">
+<script src="https://code.jquery.com/jquery-git1.js"></script>
+  <meta charset="utf-8">
+  <title>Putting into action some jQuery's animate() callbacks</title>
+</head>
+<body>
+   <div class="rectangle">
+      <div class="square-small"></div>
+   </div>
+   <button id="animation-button">Run!</button>
+   <span id="percentage">0</span>%
+</body>
+</html>
+<script>
+$('#animation-button').click(function() {
+  var $button = $(this);
+
+  $('.rectangle')
+     .find('.square-small')
+     .animate({
+           left: 280
+        },
+        {
+           duration: 2000,
+           start: function() {
+              $button.prop('disabled', true);
+           },
+           complete: function() {
+              $button.prop('disabled', false);
+           },
+           progress: function(animation, progress) {
+              $('#percentage').text(Math.round(progress * 100));
+           }
+        }
+     );
+});</script>
